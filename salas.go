@@ -1,13 +1,8 @@
 package main 
 
-type Sala struct{
-	capacidad int 
-	
-}
-var listaSalas=[]Sala{
-	{capacidad:15},
-	{capacidad:20},
-	{capacidad:10},
-	{capacidad:5},
-	
+var listaSalasCapacidad=[]int{
+	15,
+	20,
+	10,
+	 5,
 }
