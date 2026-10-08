@@ -59,6 +59,11 @@ func TestReservaFuncion(t *testing.T) {
 	if resultado != esperado {
 		t.Errorf("El resultado %v es diferente al esperado %v", resultado, esperado)
 	}
+	capacidadEsperada := 8
+	capacidadObtenida := funcion.sala[numeroDeSala]
+	if capacidadObtenida != capacidadEsperada {
+		t.Errorf("Capacidad obtenida: %v, esperada: %v", capacidadObtenida, capacidadEsperada)
+	}
 }
 
 
