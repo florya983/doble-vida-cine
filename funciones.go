@@ -32,7 +32,7 @@ func (f Funcion) VerificarExistenciaPeliculaHora(nombrePelicula string, hora str
 	return false
 }
 
-func (f Funcion) ReservaFuncion(peli Pelicula, hora string, numeroSala int, entradasPedidas int) bool {
+func (f *Funcion) ReservaFuncion(peli Pelicula, hora string, numeroSala int, entradasPedidas int) bool {
 	valor := true
 	if !f.VerificarExistenciaPeliculaHora(peli.nombre, hora) {
 		valor = false
