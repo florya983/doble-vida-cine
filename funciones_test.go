@@ -32,8 +32,33 @@ func TestVerificarExistenciaPelicula(t *testing.T) {
 	resultado := funcion.VerificarExistenciaPeliculaHora(nombrePelicula, hora)
 	esperado := true
 	if resultado != esperado {
-		t.Errorf("El resultado %v es diferente al esperado %v", nombrePelicula, hora)
+		t.Errorf("El resultado %v es diferente al esperado %v", resultado, esperado)
 	}
 
 }
+
+func TestReservaFuncion(t *testing.T) {
+	funcion := Funcion{
+		pelicula: Pelicula{
+			nombre: "Cumbres borrascosas",
+		},
+		horario: "21:00",
+		sala:    listaSalasCapacidad,
+	}
+	entradas := 2
+	numeroDeSala := 2
+	hora := "21:00"
+	nombrePelicula := "Cumbres borrascosas"
+	resultado := funcion.ReservaFuncion(
+		Pelicula{nombre: nombrePelicula},
+		hora,
+		numeroDeSala,
+		entradas,
+	)
+	esperado := true
+	if resultado != esperado {
+		t.Errorf("El resultado %v es diferente al esperado %v", resultado, esperado)
+	}
+}
+
 
