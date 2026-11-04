@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -11,16 +12,22 @@ type Funcion struct {
 }
 
 func (f Funcion) VerificarCapacidadSala(entradas int, numeroSala int) bool {
-	if f.sala[numeroSala] < entradas {
+	if !f.ValidarNumeroSala(numeroSala){
+		return false
+	}
+	if f.sala[numeroSala-1] < entradas {
 		fmt.Println("Sala llena")
 		return false
 
 	}
 	return true
-
 }
-func (f *Funcion) DescontarCapacidad(entradas int, numeroSala int) {
-	f.sala[numeroSala] = f.sala[numeroSala] - entradas
+
+func (f *Funcion) DescontarCapacidad(entradas int, numeroSala int){
+	if !f.ValidarNumeroSala(numeroSala){
+		return 
+	}
+	f.sala[numeroSala-1] = f.sala[numeroSala-1] - entradas
 }
 
 func (f Funcion) VerificarExistenciaPeliculaHora(nombrePelicula string, hora string) bool {
@@ -34,15 +41,21 @@ func (f Funcion) VerificarExistenciaPeliculaHora(nombrePelicula string, hora str
 
 func (f *Funcion) ReservaFuncion(peli Pelicula, hora string, numeroSala int, entradasPedidas int) bool {
 	valor := true
-	if !f.VerificarExistenciaPeliculaHora(peli.nombre, hora) {
-		valor = false
+	if !f.ValidarNumeroSala(numeroSala){
+		valor=false
+		return valor
 	}
-	if !f.VerificarCapacidadSala(entradasPedidas, numeroSala) {
-		valor = false
-	} else {
+	if f.VerificarExistenciaPeliculaHora(peli.nombre, hora) && f.VerificarCapacidadSala(entradasPedidas, numeroSala) {
 		f.DescontarCapacidad(entradasPedidas, numeroSala)
+	}else {
+		valor=false
 
 	}
 	return valor
 }
-
+func (f Funcion) ValidarNumeroSala(numeroSala int)bool{
+	if !(numeroSala>0 && numeroSala<=len(f.sala)){
+		return false
+	}
+	return true
+}
