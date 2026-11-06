@@ -26,16 +26,24 @@ func (f Funcion) VerificarCapacidadSala(entradas int, numeroSala int) bool {
 	return true
 
 }
-func (f *Funcion) DescontarCapacidad(entradas int, numeroSala int){
+func (f *Funcion) DescontarCapacidad(entradas int, numeroSala int)bool{
+	resultado:=0
 	if !ValidarCantidadEntradas(entradas){
-		return
+		return false
 	}
 	if !f.ValidarNumeroSala(numeroSala){
-		return 
+		return false
 	}
-	f.sala[numeroSala-1] = f.sala[numeroSala-1] - entradas
-
+	resultado=f.sala[numeroSala-1] - entradas
+	if resultado<0{
+		return false
+	}
+	f.sala[numeroSala-1]=resultado
+	return true
 }
+	
+	
+
 
 func (f Funcion) VerificarExistenciaPeliculaHora(nombrePelicula string, hora string) bool {
 	if diccionarioPeliculas[nombrePelicula] {
@@ -47,19 +55,14 @@ func (f Funcion) VerificarExistenciaPeliculaHora(nombrePelicula string, hora str
 }
 
 func (f *Funcion) ReservaFuncion(peli Pelicula, hora string, numeroSala int, entradasPedidas int) bool {
-	if !ValidarCantidadEntradas(entradasPedidas){
-		return false
-	}
-	if !f.ValidarNumeroSala(numeroSala){
+	if !ValidarCantidadEntradas(entradasPedidas) || !f.ValidarNumeroSala(numeroSala){
 		return false
 	}
 	if f.VerificarExistenciaPeliculaHora(peli.nombre, hora) && f.VerificarCapacidadSala(entradasPedidas, numeroSala) {
-		f.DescontarCapacidad(entradasPedidas, numeroSala)
-	}else {
-		return false
-
+		return f.DescontarCapacidad(entradasPedidas, numeroSala)
+		
 	}
-	return true 
+	return false
 }
 func (f Funcion) ValidarNumeroSala(numeroSala int)bool{
 	if !(numeroSala>0 && numeroSala<=len(f.sala)){
