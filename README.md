@@ -2,18 +2,17 @@
 
 Sistema de gestión y reservas de salas de cine.
 
+# Contenido
 
-Actualmente permite trabajar con:
+Reservas de funciones
 
-Películas
+Validación de peliculas,horarios
 
-Salas
 
-Funciones
 
-Control de capacidad de las salas
 
-Verificación de películas y horarios
+
+
 
 
 
